@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const Book = require('./bookModel')
 
 const Schema = mongoose.Schema
 
@@ -17,11 +18,26 @@ const userSchema = new Schema({
         require:true
     },
     city:{
-        type:String
+        type:String,
+        default:''
     },
     state:{
-        type:String
-    }
+        type:String,
+        default:''
+    },
+    books:[{
+        type:Schema.Types.ObjectId, ref: 'Book'
+    }],
+    trade_requests:[{
+        book:{type:Schema.Types.ObjectId, ref:'Book'},
+        for:{type:Schema.Types.ObjectId, ref:'User'},
+        accepted:{type:Boolean,default:false}
+    }],
+    requests_for_you:[{
+        book:{type:Schema.Types.ObjectId, ref:'Book'},
+        from:{type:Schema.Types.ObjectId, ref:'User'},
+        accept:{type:Boolean,default:false}
+    }]
 })
 
 userSchema.pre('save', function(next){

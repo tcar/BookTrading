@@ -4,8 +4,19 @@ import { Link } from 'react-router-dom'
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import RaisedButton from 'material-ui/RaisedButton'
 import Settings from 'material-ui/svg-icons/Action/settings';
+import Power from 'material-ui/svg-icons/Action/power-settings-new';
+import Popover from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+
+import { logout } from '../actions/userActions'
+import nav from '../assets/styles/nav.css'
 
 class Nav extends Component{
+    constructor(){
+        super()
+    
+    }
     render(){
         const style = {
             background:{
@@ -13,32 +24,41 @@ class Nav extends Component{
                 color: '#e5e5e5'
             },
             decoration:{
+                padding: '0px 10px',
                 textDecoration:'none',
                 color:'#e5e5e5',
-                fontSize:36
+               
+            },
+            flex:{
+                display:'flex',  
+            },
+            cursor:{
+                cursor:'pointer'
+            },
+            link:{
+                textDecoration:'none'
             }
         }
         return(
-            <div className = 'nav'>
+            <div>
                 <Toolbar  style={style.background}>
                     <ToolbarGroup firstChild={true}>
-                    <Link style={style.decoration} to = '/'><ToolbarTitle text="Booktrade" style={style.decoration} /></Link>
+                    <Link style={style.decoration} to = '/'><h2  style={style.decoration} >Booktrade</h2></Link>
                     </ToolbarGroup>
                     <ToolbarGroup lastChild={true}>
-                    <Link style={style.decoration} to = '/about'><ToolbarTitle text="About" style={style.decoration} /></Link>
+                    <Link style={style.decoration} to = '/about'><h2  style={style.decoration} >About</h2></Link>
                     {this.props.isAuthenticated?
                     (
-                    <div>
-                        <Link style={style.decoration} to = '/allbooks'><ToolbarTitle text="all books" style={style.decoration}/></Link>
-                        <Link style={style.decoration} to = '/mybooks'><ToolbarTitle text="my books" style={style.decoration}/></Link>
-                        <Link style={style.decoration} to = '/settings'><Settings /></Link>
-                        <Link style={style.decoration} to = '/logout'><ToolbarTitle text="Logout" style={style.decoration}/></Link>
+                    <div style = {style.flex}>
+                    <Link style={style.decoration} to = '/mybooks'><h2  style={style.decoration} >{this.props.name}</h2></Link>
+                     <h2 onClick={()=>{this.props.logout()}}>logout</h2>
+                     
                     </div>
                     ):
                     (
-                    <div>
-                        <Link style={style.decoration} to = '/signup'><ToolbarTitle text="Signup" style={style.decoration}/></Link>
-                        <Link style={style.decoration} to = '/login'><ToolbarTitle text="Login" style={style.decoration}/></Link>
+                    <div style = {style.flex}>
+                        <Link style={style.decoration} to = '/signup'><h2  style={style.decoration} >Sign up</h2></Link>
+                        <Link style={style.decoration} to = '/login'><h2  style={style.decoration} >Login</h2></Link>
                     </div>
                     )}
                     </ToolbarGroup>
@@ -46,16 +66,23 @@ class Nav extends Component{
             </div>
         )
     }
+ 
+
 }
+
+
 
 const mapStateToProps = (state)=>{
     return{
-        isAuthenticated:state.user.isAuthenticated
+        isAuthenticated:state.user.isAuthenticated,
+        name:state.user.user.name
     }
 }
 const mapDispatchToProps = (dispatch)=>{
     return{
-
+        logout:()=>{
+            dispatch(logout())
+        }
     }
 }
 

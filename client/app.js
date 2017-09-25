@@ -14,6 +14,9 @@ import Home from './containers/Home'
 import Signup from './containers/Signup'
 import Login from './containers/Login'
 import About from './containers/About'
+import Allbooks from './containers/Allbooks'
+import Mybooks from './containers/Mybooks'
+import Settings from './containers/Settings'
 
  class App extends Component{
     render(){
@@ -35,8 +38,43 @@ import About from './containers/About'
                             <Signup/>
                         )
                         )}/>
+                        <Route exact path='/login' render={() => (
+
+                        this.props.isAuthenticated ? (
+                            <Redirect to="/"/>
+                        ) : (
+                            <Login/>
+                        )
+                        )}/>
                     <Route exact path='/about' component={About}/>
-                    <Route exact path='/login' component={Login}/>
+                    <Route exact path='/allbooks' render={() => (
+
+                        this.props.isAuthenticated ? (
+                            <Allbooks />
+                        ) : (
+                            <Redirect to="/"/>
+                            
+                        )
+                        )}/>
+                    <Route exact path='/mybooks' render={() => (
+
+                        this.props.isAuthenticated ? (
+                            <Mybooks />
+                        ) : (
+                            <Redirect to="/"/>
+                            
+                        )
+                        )}/>
+                    <Route exact path='/settings' render={() => (
+
+                        this.props.isAuthenticated ? (
+                            <Settings />
+                        ) : (
+                            <Redirect to="/"/>
+                            
+                        )
+                        )}/>
+
                     </Switch>
                     </div>
                     </div>

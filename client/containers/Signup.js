@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import IconButton from 'material-ui/IconButton';
 import Send from 'material-ui/svg-icons/Content/send';
 import Validator from 'validator'
 import isEmpty from 'lodash/isEmpty';
@@ -87,7 +85,6 @@ class Signup extends Component{
         e.preventDefault()
 
         const errors = this.valid()
-        console.log(this.props.error)
         this.setState({errors:errors})
         
         if(isEmpty(errors)){
@@ -132,7 +129,7 @@ class Signup extends Component{
 
 const mapStateToProps = (state)=>{
     return{
-        error:state.user.error
+        error:state.user.signupError
 
     }
 }

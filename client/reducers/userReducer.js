@@ -1,39 +1,71 @@
 import jwtDecode from 'jwt-decode'
 
-const isAuthenticated = ()=>{
-    if(localStorage.getItem('token')){
-        return true
-    }else{
-        return false
-    }
-}
+
 
 export default function userReducer(state={
 isFetching:false,
-isAuthenticated:isAuthenticated(),
-error:'',
+isAuthenticated:false,
+signupError:'',
+loginError:{},
 user:{}
 },action){
     switch(action.type){
         case 'LOGIN':{
-            return {
-                isAuthenticated:true
+            if(action.payload.email||action.payload.password){
+                return{...state,
+                    loginError:action.payload,
+                    isAuthenticated:false
+                }
+            }else{
+                return{...state,
+                    loginError:{},
+                    isAuthenticated:true,
+                    user:jwtDecode(action.payload)
+                }
             }
         }
         case 'SIGNUP':{
             if(action.payload.error){
                 return{...state,
-                    error:action.payload.error,
+                    signupError:action.payload.error,
                     isAuthenticated:false
                 }
             }else{
                 return{...state,
-                    error:'',
+                    signupError:'',
                     isAuthenticated:true,
                     user:jwtDecode(action.payload)
                 }
             }
             
+        }
+        case 'LOGOUT':{
+            return{...state,
+                isAuthenticated:false,
+                error:'',
+                user:{}
+            }
+        }
+        case 'SET_CURRENT_USER':{
+            return{
+                ...state,
+                isAuthenticated:true,
+                user:jwtDecode(action.payload)
+            }
+        }
+        case 'UPDATE':{
+            return{...state,
+                user:jwtDecode(action.payload)
+            }
+        }
+        case 'HANDLE_CHANGE':{
+            return{...state,
+                user:{...state.user,
+                name:action.payload.name,
+                city:action.payload.city,
+                state:action.payload.state
+                }
+            }
         }
         default:
         return state

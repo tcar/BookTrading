@@ -1,4 +1,6 @@
 import axios from 'axios'
+import jwtDecode from 'jwt-decode'
+
 
 export function signup(data){
 
@@ -10,9 +12,65 @@ export function signup(data){
         }).then((res)=>{
             if(!res.data.error){
                 localStorage.setItem('token',res.data)
+                const token = localStorage.token
+                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
             }
             
             dispatch({type:'SIGNUP',payload:res.data})
         })
+    }
+}
+
+export function logout(){
+    
+        return dispatch =>{
+            localStorage.removeItem('token')
+            delete axios.defaults.headers.common['Authorization'];
+            dispatch({type:'LOGOUT'})
+        }
+    }
+export function login(data){
+    return dispatch=>{
+        axios({
+            method:'post',
+            url:'login',
+            data:data
+        }).then((res)=>{
+            console.log(res)
+            if(!res.data.email&&!res.data.password){
+                localStorage.setItem('token',res.data)
+                const token = localStorage.token
+                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+            }
+            dispatch({type:'LOGIN',payload:res.data})
+        })
+    }
+}
+
+export function setCurrentUser(token){
+    return{
+        type:'SET_CURRENT_USER',
+        payload:token
+    }
+}
+    
+export function update(data){
+    return dispatch=>{
+        axios({
+            method:'put',
+            url:'/settings',
+            data:data
+        }).then((res)=>{
+            localStorage.removeItem('token')
+            localStorage.setItem('token', res.data)
+            dispatch({type:'UPDATE',payload:res.data})
+
+        })
+    }
+}
+
+export function handleChange(profile){
+    return dispatch=>{
+        dispatch({type:'HANDLE_CHANGE',payload:profile})
     }
 }
