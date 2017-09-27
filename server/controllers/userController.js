@@ -16,7 +16,6 @@ module.exports = {
         newUser.password = req.body.password
 
         await newUser.save()
-        console.log(newUser)
         const token = jwt.sign({
             name:req.body.name,
             email:req.body.email,
@@ -63,7 +62,6 @@ module.exports = {
         if(token){
             
             const decoded  = jwt.verify(token, 'secret')
-            console.log(token)
             const user = await User.findOne({email:decoded.email})
           
             if(!user){
@@ -72,21 +70,16 @@ module.exports = {
             req.user =user
             next()
         }else{
-            console.log('no token provided')
         }
     },
 
     settings: async(req,res,next)=>{
         const user = await User.findOne({email:req.user.email})
-        console.log(req.body)
         user.name = req.body.name
         user.city = req.body.city
         user.state = req.body.state
         await user.save()
-        
-        
-       
-        console.log(user)
+                
              const token = jwt.sign({
                     name:user.name,
                     email:user.email,
@@ -97,7 +90,36 @@ module.exports = {
                 res.send(token)
         
     },
+    info:async(req,res,next)=>{
+        
+        const user = await User.findOne({_id:req.user._id})
+            .populate('trade_requests.for')
+            .populate('trade_requests.book')
+            .populate('requests_for_you.from')
+            .populate('requests_for_you.book')
+        res.send(user)
+    },
+    deleteRequest:async(req,res,next)=>{
 
+        const user = await User.findOne({_id:req.user._id}).populate('trade_requests.for').populate('trade_requests.book')
+        const userr= user.trade_requests.filter((request)=>{
+  
+            return request._id.toString() !==req.body.id.toString()
+        })
+        user.trade_requests = userr
+        await user.save()
+        const trader = await User.findOne({_id:req.body.userid})
+            .populate('trade_requests.for')
+            .populate('trade_requests.book')
+            .populate('requests_for_you.from')
+            .populate('requests_for_you.book')
+            const trade= trader.requests_for_you.filter((request)=>{
+                return request.reqid.toString() !==req.body.id.toString()
+            })
+            trader.requests_for_you = trade
+            await trader.save()
+        res.send(user)
+    },
 
 
     //test

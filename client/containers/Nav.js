@@ -50,8 +50,9 @@ class Nav extends Component{
                     {this.props.isAuthenticated?
                     (
                     <div style = {style.flex}>
+                    <Link style={style.decoration} to = '/allbooks'><h2  style={style.decoration} >browse books</h2></Link>
                     <Link style={style.decoration} to = '/mybooks'><h2  style={style.decoration} >{this.props.name}</h2></Link>
-                     <h2 onClick={()=>{this.props.logout()}}>logout</h2>
+                     <h2 style={style.cursor} onClick={()=>{this.props.logout()}}>logout</h2>
                      
                     </div>
                     ):

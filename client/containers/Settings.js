@@ -66,7 +66,6 @@ handleChange(e){
     const name = document.getElementById('name').value
     const city = document.getElementById('city').value
     const state = document.getElementById('state').value
-    console.log(name)
     const profile = {
         name:name,
         city:city,

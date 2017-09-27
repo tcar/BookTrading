@@ -7,7 +7,10 @@ isFetching:false,
 isAuthenticated:false,
 signupError:'',
 loginError:{},
-user:{}
+user:{},
+user_info:[],
+requests_for_you:[],
+trade_requests:[]
 },action){
     switch(action.type){
         case 'LOGIN':{
@@ -65,6 +68,13 @@ user:{}
                 city:action.payload.city,
                 state:action.payload.state
                 }
+            }
+        }
+        case 'USER_INFO':{
+            return{...state,
+                user_info:action.payload,
+                trade_requests:action.payload.trade_requests,
+                requests_for_you:action.payload.requests_for_you
             }
         }
         default:

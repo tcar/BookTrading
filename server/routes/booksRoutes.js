@@ -13,9 +13,12 @@ router.route('/trade')
     .post(userController.authenticate,booksController.tradeRequest)
 router.route('/mybooks')
     .get(userController.authenticate,booksController.mybooks)
-
+router.route('/accept')
+    .post(userController.authenticate,booksController.accept)
 //test
 router.route('/allbooks')
-    .get(booksController.allBooks)
+    .get(userController.authenticate,booksController.allBooks)
+router.route('/books')
+    .delete(booksController.deleteBooks)
 
 module.exports = router

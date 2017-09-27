@@ -7,3 +7,10 @@
     align-items: center;
     color:'#e5e5e5';
 }
+.profile-nav ul {
+	list-style-type: none
+}
+
+.addbook,.mybooks,.trade-requests,.requests-for-you{
+	display: none
+}

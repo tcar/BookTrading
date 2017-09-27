@@ -9,8 +9,12 @@ router.route('/login')
     .post(userController.login)
 router.route('/settings')
     .put(userController.authenticate, userController.settings)
+router.route('/info')
+    .get(userController.authenticate,userController.info)
+router.route('/deleterequest')
+    .post(userController.authenticate,userController.deleteRequest)
 
-//test
+    //test
 
 router.route('/users')
     .get(userController.users)

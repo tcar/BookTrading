@@ -7,7 +7,6 @@ export default class Books extends Component{
        this.props.mybooks()
     }
     render(){
-        console.log(this.props.books)
         
         const books = this.props.books.map((book)=>{
             return <BookTemplate key={book._id} deleteBook = {this.props.deleteBook} info={book}/>

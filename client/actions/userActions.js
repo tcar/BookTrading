@@ -74,3 +74,25 @@ export function handleChange(profile){
         dispatch({type:'HANDLE_CHANGE',payload:profile})
     }
 }
+export function info(){
+    return dispatch=>{
+        axios({
+            method:'get',
+            url:'/info'
+        }).then((res)=>{
+            console.log(res.data)
+            dispatch({type:'USER_INFO',payload:res.data})
+        })
+    }
+}
+export function deleteRequest(request){
+    return dispatch=>{
+        axios({
+            method:'post',
+            url:'/deleterequest',
+            data:request
+        }).then((res)=>{
+            dispatch({type:'USER_INFO',payload:res.data})
+        })
+    }
+}

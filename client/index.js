@@ -12,16 +12,24 @@ import App from './app'
 
 if (localStorage.token) {
     const token = localStorage.token
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
     store.dispatch(setCurrentUser(token))
   }else{
     delete axios.defaults.headers.common['Authorization'];
   }
 
 const root = document.getElementById('root')
+const muiTheme = getMuiTheme({
+   tabs:{
+       backgroundColor:'white',
+       textColor:'black',
+      
+   },
+  
+  })
 
 ReactDOM.render(
-<MuiThemeProvider >
+<MuiThemeProvider muiTheme={muiTheme} >
     <Provider store={store}>
         <App />
     </Provider>

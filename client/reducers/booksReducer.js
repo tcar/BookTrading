@@ -1,6 +1,7 @@
 export default function booksReducer(state={
     books:[],
-    mybooks:[]
+    mybooks:[],
+    allbooks:[]
 
 },action){
     switch(action.type){
@@ -12,6 +13,11 @@ export default function booksReducer(state={
         case 'MY_BOOKS':{
             return{...state,
             mybooks:action.payload
+            }
+        }
+        case 'ALL_BOOKS':{
+            return{...state,
+                allbooks:action.payload
             }
         }
         default:

@@ -45,3 +45,35 @@ export function deleteBook(book){
         })
     }
 }
+export function allbooks(){
+    return dispatch=>{
+        axios({
+            method:'get',
+            url:'/allbooks'
+        }).then((res)=>{
+            dispatch({type:'ALL_BOOKS',payload:res.data})
+        })
+    }
+}
+export function trade(book){
+    return dispatch=>{
+        axios({
+            method:'post',
+            url:'/trade',
+            data:book
+        }).then((res)=>{
+            dispatch({type:'USER_INFO',payload:res.data})
+        })
+    }
+}
+export function accept(book){
+    return dispatch=>{
+        axios({
+            method:'post',
+            url:'/accept',
+            data:book
+        }).then((res)=>{
+            dispatch({type:'USER_INFO',payload:res.data})
+        })
+    }
+}
