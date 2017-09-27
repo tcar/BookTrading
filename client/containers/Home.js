@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Paper from 'material-ui/Paper'
-import Star from 'material-ui/svg-icons/Toggle/star';
+import Star from 'material-ui/svg-icons/toggle/star';
 
 import {  } from '../actions/userActions'
 class Home extends Component{
