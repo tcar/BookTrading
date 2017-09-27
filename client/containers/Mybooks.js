@@ -4,10 +4,11 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton'
 import {List, ListItem} from 'material-ui/List';
 import { search, mybooks, addBook,deleteBook, accept } from '../actions/booksActions'
-import {Tabs, Tab} from 'material-ui/Tabs';
+import { Tabs, Tab } from 'material-ui-scrollable-tabs/Tabs';
 import Slider from 'material-ui/Slider';
 import { info,deleteRequest } from '../actions/userActions'
-
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 import Card from '../components/card'
 import Books from '../components/Books'
@@ -45,11 +46,14 @@ class Mybooks extends Component{
         const style={
             display:'flex',
             border:{
-                borderRight:'1px solid black'
+            borderRight:'1px solid black'
+            },
+            color:{
+                color:'black'
             }
         }
         return(
-            <Tabs className='row'>
+            <Tabs style={style.color} tabType={'scrollable-buttons'} className='row'>
                 <Tab label={<span style={{ color: 'black' }}>add book</span>}>
                     <div>
                         <h2>add book</h2>

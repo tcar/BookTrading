@@ -23,8 +23,10 @@ const muiTheme = getMuiTheme({
    tabs:{
        backgroundColor:'white',
        textColor:'black',
-      
+       selectedTextColor :'black'
    },
+
+   
   
   })
 

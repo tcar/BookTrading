@@ -28,6 +28,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
     "material-ui": "^0.19.2",
+    "material-ui-scrollable-tabs": "^1.0.0",
     "mongoose": "^4.11.12",
     "path": "^0.12.7",
     "react": "^15.6.1",
