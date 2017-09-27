@@ -3,11 +3,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import RaisedButton from 'material-ui/RaisedButton'
-import Settings from 'material-ui/svg-icons/Action/settings';
-import Power from 'material-ui/svg-icons/Action/power-settings-new';
-import Popover from 'material-ui/Popover';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
 
 import { logout } from '../actions/userActions'
 import nav from '../assets/styles/nav.css'
