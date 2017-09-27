@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton'
-import Send from 'material-ui/svg-icons/Content/send';
+import Send from 'material-ui/svg-icons/content/send';
 import Validator from 'validator'
 import isEmpty from 'lodash/isEmpty';
 
@@ -71,7 +71,6 @@ class Login extends Component{
         e.preventDefault()
 
         const errors = this.valid()
-        console.log(this.props.error)
         this.setState({errors:errors})
         
         if(isEmpty(errors)){
