@@ -8,7 +8,9 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "webpack": "webpack --watch"
+    "webpack": "webpack --watch",
+    "postinstall": "webpack -p",
+"start": "node server.js"
   },
   "author": "",
   "license": "ISC",
