@@ -33,7 +33,11 @@ class Nav extends Component{
                 display:'flex',  
             },
             cursor:{
-                cursor:'pointer'
+                cursor:'pointer',
+                paddingLeft: '10px',
+                paddingRight:'30px',
+                textDecoration:'none',
+                color:'#e5e5e5',
             },
             link:{
                 textDecoration:'none'

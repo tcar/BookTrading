@@ -13,6 +13,7 @@ import Card from '../components/card'
 import Books from '../components/Books'
 import MyRequests from '../components/MyRequests'
 import RequestsForYou from '../components/RequestsForYou'
+import Settings from './Settings'
 
 class Mybooks extends Component{
     constructor(){
@@ -41,9 +42,14 @@ class Mybooks extends Component{
             )
         })
         
-
+        const style={
+            display:'flex',
+            border:{
+                borderRight:'1px solid black'
+            }
+        }
         return(
-            <Tabs>
+            <Tabs className='row'>
                 <Tab label={<span style={{ color: 'black' }}>add book</span>}>
                     <div>
                         <h2>add book</h2>
@@ -80,6 +86,13 @@ class Mybooks extends Component{
                     <div>
                         <h2>trade requests for you</h2>
                         <RequestsForYou accept={this.accept} user_info = {this.props.requests_for_you}  />
+
+                    </div>
+                </Tab>
+                <Tab label={<span style={{ color: 'black' }}>profile</span>}> 
+                    <div>
+                        
+                        <Settings />
 
                     </div>
                 </Tab>
