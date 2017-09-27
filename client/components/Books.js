@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {List, ListItem} from 'material-ui/List';
 
-import BookTemplate from './bookTemplate'
+import BookTemplate from './BookTemplate'
 export default class Books extends Component{
     componentWillMount(){
        this.props.mybooks()
