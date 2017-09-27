@@ -7,7 +7,7 @@ const booksRoutes = require('./server/routes/booksRoutes.js')
 const userRoutes = require('./server/routes/userRoutes')
 
 const app = express()
-mongoose.connect('mongodb://localhost:27017/bookdb'||process.env.MONGOLAB_URL)
+mongoose.connect(process.env.MONGOLAB_URL)
 app.use(express.static(path.join(__dirname,'dist')))
 
 
